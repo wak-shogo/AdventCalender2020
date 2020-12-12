@@ -109,12 +109,12 @@ void OnPixels(int hue,int saturation, int brightness,int lednum){
 void FirePixels(){
   delay(5000);
   for(int value=0;value<128;value++){
-    OnPixels(HUE,saturation,brightness,lednum);
+    OnPixels(HUE,saturation,value,lednum);
     delay(5);//フェードの速さを調節
   }
   delay(5000);
   for(value=128;value>0;value--){
-    OnPixels(HUE,saturation,brightness,lednum);
+    OnPixels(HUE,saturation,value,lednum);
     delay(5);
   }
   pixels.clear(); //NeoPixelの出力をリセット
