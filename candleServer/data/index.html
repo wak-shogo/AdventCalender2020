@@ -1,0 +1,41 @@
+<!DOCTYPE html><html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<style>body { text-align: center; font-family: "Trebuchet MS", Arial; margin-left:auto; margin-right:auto;}
+.slider { width: 300px; }
+#HUE{color: red;}
+</style>
+
+<script src="/jquery.min.js"></script>
+</head><body><h1>ESP32 with RGB LED</h1>
+<p>HUE: <span id="HUE"></span></p>
+<input type="range" min="0" max="65536" class="slider" id="SliderHUE" onchange="send_value(this.value,'HUE')" value="0"/>
+<p>Brightness: <span id="Brightness"></span></p>
+<input type="range" min="0" max="255" class="slider" id="SliderB" onchange="send_value(this.value,'Brightness')" value="0"/>
+<p>Saturation: <span id="Saturation"></span></p>
+<input type="range" min="0" max="255" class="slider" id="SliderS" onchange="send_value(this.value,'Saturation')" value="0"/>
+<p>lednum: <span id="lednum"></span></p>
+<input type="range" min="0" max="30" class="slider" id="SliderL" onchange="send_value(this.value,'lednum')" value="0"/>
+<script>
+
+var sliderHUE = document.getElementById("SliderHUE");
+var sliderB = document.getElementById("SliderB");
+var sliderS = document.getElementById("SliderS");
+var sliderL = document.getElementById("SliderL");
+
+var HUE = document.getElementById("HUE"); 
+var Brightness = document.getElementById("Brightness");
+var Saturation = document.getElementById("Saturation");
+var lednum = document.getElementById("lednum");
+HUE.innerHTML = sliderHUE.value;
+Brightness.innerHTML = sliderB.value;
+Saturation.innerHTML = sliderS.value;
+lednum.innerHTML = sliderL.value;
+
+sliderHUE.oninput = function() { sliderHUE.value = this.value; HUE.innerHTML = this.value; }
+sliderB.oninput = function() { sliderB.value = this.value; Brightness.innerHTML = this.value; }
+sliderS.oninput = function() { sliderS.value = this.value; Saturation.innerHTML = this.value; }
+sliderL.oninput = function() { sliderL.value = this.value; lednum.innerHTML = this.value; }
+$.ajaxSetup({timeout:1000}); function send_value(pos,name) { 
+$.get("/?" + name + "=" + pos + "&"); {Connection: close};}</script>
+</body></html>
